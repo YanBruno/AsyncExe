@@ -1,4 +1,5 @@
 ﻿using AsyncExe.Domain.Tasks;
+using System;
 
 namespace AsyncExe.Infra
 {
@@ -6,14 +7,37 @@ namespace AsyncExe.Infra
     {
         static void Main(string[] args)
         {
-            //Método prepara omelete e pao
-            AsyncExemplos.OmeleteEPaoAsync();
+            Console.WriteLine("Selecione uma opção:");
+            Console.WriteLine("1 - Método prepara omelete e pao ");
+            Console.WriteLine("2 - Método prepara pao");
+            Console.WriteLine("3 - Método prepara omelete dada a demora na tarefa de comprar farinha");
+            Console.WriteLine("");
 
-            //Método prepara pao
-            AsyncExemplos.OmeleteOuPaoAsync(7000);
+            var opcao = Console.ReadLine();
 
-            //Método prepara omelete dada a demora na tarefa de comprar farinha
-            AsyncExemplos.OmeleteOuPaoAsync(9000);
+            Console.Clear();
+            switch (opcao)
+            {
+                case "1":
+                    //Método prepara omelete e pao
+                    AsyncExemplos.OmeleteEPaoAsync();
+                    break;
+
+                case "2":
+                    //Método prepara pao
+                    AsyncExemplos.OmeleteOuPaoAsync(7000);
+                    break;
+
+                case "3":
+                    //Método prepara omelete dada a demora na tarefa de comprar farinha
+                    AsyncExemplos.OmeleteOuPaoAsync(9000);
+                    break;
+                default:
+                    break;
+            }
+
+
+            Console.ReadKey();
         }
     }
 }
