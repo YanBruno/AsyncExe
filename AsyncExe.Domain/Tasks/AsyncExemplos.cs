@@ -7,11 +7,11 @@ namespace AsyncExe.Domain.Tasks
     {
         public async static void OmeleteEPaoAsync()
         {
-            var tarefaMaria = Tarefas.BuscarOvos("Maria");
-            var tarefaJoao = Tarefas.ComprarFarinha("João");
+            var tarefaLeticia = Tarefas.BuscarOvos("Leticia");
+            var tarefaYan = Tarefas.ComprarFarinha("Yan");
 
-            _ = await Cozinhar.Omelete(await tarefaMaria);
-            _ = await Cozinhar.Pao(await tarefaMaria, await tarefaJoao);
+            _ = await Cozinhar.Omelete(await tarefaLeticia);
+            _ = await Cozinhar.Pao(await tarefaLeticia, await tarefaYan);
 
         }
         public async static void OmeleteOuPaoAsync(int tempoDeEsperaDaTarefaDeEspera)
@@ -26,12 +26,12 @@ namespace AsyncExe.Domain.Tasks
 
             if (tarefaTerminouprimeiro == tarefaYan)
             {
-                Console.WriteLine($"João chegou rápido");
+                Console.WriteLine($"Yan chegou rápido");
                 _ = await Cozinhar.Pao(await tarefaLeticia, await tarefaYan);
             }
             else
             {
-                Console.WriteLine($"João demorou demais");
+                Console.WriteLine($"Yan demorou demais");
                 _ = await Cozinhar.Omelete(await tarefaLeticia);
             }
         }
