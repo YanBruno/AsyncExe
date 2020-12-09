@@ -7,32 +7,32 @@ namespace AsyncExe.Domain.Tasks
     {
         public async static void OmeleteEPaoAsync()
         {
-            var tarefaLeticia = Tarefas.BuscarOvos("Leticia");
-            var tarefaYan = Tarefas.ComprarFarinha("Yan");
+            var tarefaBuscarOvos = Tarefas.BuscarOvos("Leticia");
+            var tarefaBuscarFarinha = Tarefas.ComprarFarinha("Yan");
 
-            _ = await Cozinhar.Omelete(await tarefaLeticia);
-            _ = await Cozinhar.Pao(await tarefaLeticia, await tarefaYan);
+            _ = await Cozinhar.Omelete(await tarefaBuscarOvos);
+            _ = await Cozinhar.Pao(await tarefaBuscarOvos, await tarefaBuscarFarinha);
 
         }
         public async static void OmeleteOuPaoAsync(int tempoDeEsperaDaTarefaDeEspera)
         {
-            var tarefaLeticia = Tarefas.BuscarOvos("Letícia");
-            var tarefaYan = Tarefas.ComprarFarinha("Yan");
+            var tarefaBuscarOvos = Tarefas.BuscarOvos("Letícia");
+            var tarefaBuscarFarinha = Tarefas.ComprarFarinha("Yan");
             var tarefaDeEspera = Tarefas.TarefaDeEspera(tempoDeEsperaDaTarefaDeEspera);
 
             //Comprar farinha 8 segundos
 
-            var tarefaTerminouprimeiro = await Task.WhenAny(tarefaDeEspera, tarefaYan);
+            var tarefaTerminouPrimeiro = await Task.WhenAny(tarefaDeEspera, tarefaBuscarFarinha);
 
-            if (tarefaTerminouprimeiro == tarefaYan)
+            if (tarefaTerminouPrimeiro == tarefaBuscarFarinha)
             {
                 Console.WriteLine($"Yan chegou rápido");
-                _ = await Cozinhar.Pao(await tarefaLeticia, await tarefaYan);
+                _ = await Cozinhar.Pao(await tarefaBuscarOvos, await tarefaBuscarFarinha);
             }
             else
             {
                 Console.WriteLine($"Yan demorou demais");
-                _ = await Cozinhar.Omelete(await tarefaLeticia);
+                _ = await Cozinhar.Omelete(await tarefaBuscarOvos);
             }
         }
     }
